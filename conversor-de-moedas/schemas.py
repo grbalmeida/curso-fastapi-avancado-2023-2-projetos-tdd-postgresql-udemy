@@ -13,3 +13,7 @@ class ConverterInput(BaseModel):
                 raise ValueError(f'Invalid currency {currency}')
             
         return value
+    
+class ConverterOutput(BaseModel):
+    message: str
+    data: List[dict]
