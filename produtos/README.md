@@ -3,3 +3,25 @@
 ```
 docker compose up app
 ```
+
+### Comando para subir banco de dados
+
+```
+docker compose up postgresql -d
+
+```
+
+### Comando para subir pgAdmin
+
+```
+docker compose up pgadmin -d
+```
+
+### Caso não crie o usuário e o banco automaticamente
+
+
+```sql
+CREATE DATABASE main;
+CREATE USER admin WITH ENCRYPTED PASSWORD 'adminpass';
+GRANT ALL PRIVILEGES ON DATABASE main TO admin;
+```
