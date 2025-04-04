@@ -37,3 +37,9 @@ docker-compose run --user 1000 app sh -c 'alembic revision --autogenerate -m "ad
 ```
 docker-compose run --user 1000 app sh -c 'alembic upgrade head'
 ```
+
+### Comando para rodar todos os testes
+
+```
+docker-compose run app sh -c "pytest"
+```
