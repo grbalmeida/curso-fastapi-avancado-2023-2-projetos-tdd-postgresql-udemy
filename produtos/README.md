@@ -25,3 +25,15 @@ CREATE DATABASE main;
 CREATE USER admin WITH ENCRYPTED PASSWORD 'adminpass';
 GRANT ALL PRIVILEGES ON DATABASE main TO admin;
 ```
+
+### Comando para criar migration
+
+```
+docker-compose run --user 1000 app sh -c 'alembic revision --autogenerate -m "add categories table"'
+```
+
+### Comando para aplicar as migrações
+
+```
+docker-compose run --user 1000 app sh -c 'alembic upgrade head'
+```
