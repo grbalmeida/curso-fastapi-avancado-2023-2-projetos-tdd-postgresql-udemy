@@ -12,3 +12,6 @@ class Category(CustomBaseModel):
             raise ValueError('Invalid slug')
         
         return value
+
+class CategoryOutput(Category):
+    id: int
