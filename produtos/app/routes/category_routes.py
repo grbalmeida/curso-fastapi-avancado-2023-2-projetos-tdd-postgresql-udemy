@@ -29,7 +29,6 @@ def delete_category(
     id: int,
     db_session: Session = Depends(get_db_session)
 ):
-    print(f"ID --------------------- {id}")
     uc = CategoryUseCases(db_session=db_session)
     uc.delete_category(id)
 

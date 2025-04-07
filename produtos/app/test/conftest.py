@@ -19,15 +19,17 @@ def categories_on_db(db_session):
         CategoryModel(name='Decoração', slug='decoracao')
     ]
 
-    for category in categories:
-        db_session.add(category)
-    db_session.commit()
+    try:
+        for category in categories:
+            db_session.add(category)
+        db_session.commit()
 
-    for category in categories:
-        db_session.refresh(category)
+        for category in categories:
+            db_session.refresh(category)
 
-    yield categories
+        yield categories
 
-    for category in categories:
-        db_session.delete(category)
-    db_session.commit()
+    finally:
+        for category in categories:
+            db_session.delete(category)
+        db_session.commit()
