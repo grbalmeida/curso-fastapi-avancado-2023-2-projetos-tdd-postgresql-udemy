@@ -54,6 +54,10 @@ def product_on_db(db_session):
 
     yield product
 
-    db_session.delete(product)
-    db_session.delete(category)
+    if db_session.query(ProductModel).filter_by(id=product.id).first():
+        db_session.delete(product)
+
+    if db_session.query(CategoryModel).filter_by(id=category.id).first():
+        db_session.delete(category)
+
     db_session.commit()
