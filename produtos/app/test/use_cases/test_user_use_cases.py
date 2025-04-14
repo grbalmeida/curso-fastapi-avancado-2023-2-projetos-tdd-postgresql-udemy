@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta, timezone
 from fastapi import HTTPException
 import pytest
 from passlib.context import CryptContext
@@ -45,3 +46,37 @@ def test_register_user_username_already_exists(db_session):
 
     db_session.delete(user_on_db)
     db_session.commit()
+
+def test_user_login(db_session, user_on_db):
+    uc = UserUseCases(db_session=db_session)
+
+    user = User(
+        username=user_on_db.username,
+        password='pass#'
+    )
+
+    token_data = uc.user_login(user=user, expires_in=30)
+
+    assert token_data.expires_at < datetime.now(timezone.utc) + timedelta(minutes=31)
+
+def test_user_login_invalid_username(db_session, user_on_db):
+    uc = UserUseCases(db_session=db_session)
+
+    user = User(
+        username='Invalid',
+        password='pass#'
+    )
+
+    with pytest.raises(HTTPException):
+        uc.user_login(user=user, expires_in=30)
+
+def test_user_login_invalid_password(db_session, user_on_db):
+    uc = UserUseCases(db_session=db_session)
+
+    user = User(
+        username=user_on_db.username,
+        password='invalid'
+    )
+
+    with pytest.raises(HTTPException):
+        uc.user_login(user=user, expires_in=30)
