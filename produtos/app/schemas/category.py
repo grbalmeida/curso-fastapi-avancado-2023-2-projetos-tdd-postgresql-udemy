@@ -15,3 +15,6 @@ class Category(CustomBaseModel):
 
 class CategoryOutput(Category):
     id: int
+
+    class Config:
+        orm_mode=True
