@@ -29,7 +29,7 @@ def test_list_categories_uc(db_session, categories_on_db):
 
     page = uc.list_categories(page=1, size=2)
 
-    assert type(page) == (Page)
+    assert type(page) == Page
     assert len(page.items) == 2
     assert page.total == 4
     assert page.page == 1
