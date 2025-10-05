@@ -35,10 +35,10 @@ def test_list_categories_uc(db_session, categories_on_db):
     assert page.page == 1
     assert page.size == 2
     assert page.pages == 2
-    assert page.items[0].name == 'Roupa'
-    assert page.items[0].slug == 'roupa'
-    assert page.items[1].name == 'Carro'
-    assert page.items[1].slug == 'carro'
+    assert page.items[0].name == categories_on_db[0].name
+    assert page.items[0].slug == categories_on_db[0].slug
+    assert page.items[1].name == categories_on_db[1].name
+    assert page.items[1].slug == categories_on_db[1].slug
 
 def test_delete_category(db_session):
     category_model = CategoryModel(name='Roupa', slug='roupa')
